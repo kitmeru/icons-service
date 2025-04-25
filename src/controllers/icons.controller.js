@@ -91,11 +91,7 @@ export async function getIconsByCollection(req, res, next) {
 
 export async function searchIconsInCollection(req, res, next) {
   const { q, page = 1, limit = 20, collections } = req.query
-
-  if (q.length > 1 && q.length < 2) {
-    return next(ApiResponse.badRequest(400, 'Укажите строку поиска (минимум 2 символа)'))
-  }
-
+  
   const collectionList = collections
     ? collections.split(',').map(c => c.trim())
     : await getAllCollectionNames()
