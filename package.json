@@ -13,6 +13,7 @@
   "exports": "./src/app.js",
   "dependencies": {
     "@babel/preset-env": "^7.23.9",
+    "@iconify/json": "^2.2.331",
     "compression": "^1.7.4",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
@@ -22,9 +23,10 @@
     "express-rate-limit": "^7.1.5",
     "express-validator": "^7.0.1",
     "helmet": "^7.1.0",
+    "html-entities": "^2.6.0",
     "http-errors": "^2.0.0",
     "jsonwebtoken": "^9.0.2",
+    "lodash-es": "^4.17.21",
     "morgan": "~1.9.1"
-  },
-  "devDependencies": {}
+  }
 }
