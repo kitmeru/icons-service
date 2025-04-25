@@ -12,7 +12,7 @@ const iconsDir = path.join(__dirname, '..', '..', 'node_modules', '@iconify', 'j
 
 
 function buildSVG({ body, width = 16, height = 16 }) {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}">${body}</svg>`
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}">${body}</svg>`
 }
 
 function svgToDataURI(svg) {
