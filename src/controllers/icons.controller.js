@@ -19,7 +19,7 @@ function buildSVG({ body, width = 16, height = 16 }) {
 function svgToDataURI(svg) {
   const encoded = encode(svg, { mode: 'nonAsciiPrintable' })
   const base64 = Buffer.from(encoded).toString('base64')
-  return `data:image/svg+xmlbase64,${base64}`
+  return `data:image/svg+xml;base64,${base64}`
 }
 
 export async function getCollections(req, res, next) {
