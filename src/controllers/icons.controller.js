@@ -1,7 +1,6 @@
 import fs from 'fs/promises'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { encode } from 'html-entities'
 
 import { getCache, setCache } from '../utils/cache.js'
 import { loadCollectionsMeta, getAllCollectionNames } from '../utils/iconify.js'
@@ -17,8 +16,7 @@ function buildSVG({ body, width = 16, height = 16 }) {
 }
 
 function svgToDataURI(svg) {
-  const encoded = encode(svg, { mode: 'nonAsciiPrintable' })
-  const base64 = Buffer.from(encoded).toString('base64')
+  const base64 = Buffer.from(svg).toString('base64')
   return `data:image/svg+xml;base64,${base64}`
 }
 
