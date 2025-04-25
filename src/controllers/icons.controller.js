@@ -38,9 +38,11 @@ export async function getCollections(req, res, next) {
       paginatedCollectionNames.map(async (collection) => {
         const filePath = path.join(iconsDir, 'json', `${collection}.json`)
         const collectionData = JSON.parse(await fs.readFile(filePath, 'utf-8'))
+        const samples = (data[collection]?.samples ?? []).slice(0, 3) // Берем топ-3
 
         // Получаем 3 самых популярных иконки
         const sortedIcons = Object.keys(collectionData.icons)
+          .filter((iconName) => (samples.includes(iconName)))
           .map((iconName) => ({
             name: iconName,
             height: collectionData.height,
@@ -48,8 +50,6 @@ export async function getCollections(req, res, next) {
             displayHeight: data[collection].height,
             ...collectionData.icons[iconName],
           }))
-          .sort()
-          .slice(0, 3) // Берем топ-3
 
         const previewUris = sortedIcons.map((icon) => {
           const svg = buildSVG(icon)
