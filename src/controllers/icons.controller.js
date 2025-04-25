@@ -43,6 +43,8 @@ export async function getCollections(req, res, next) {
         const sortedIcons = Object.keys(collectionData.icons)
           .map((iconName) => ({
             name: iconName,
+            height: data[collection].height,
+            width: data[collection].height,
             ...collectionData.icons[iconName],
           }))
           .sort()
