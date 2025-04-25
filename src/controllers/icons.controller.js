@@ -11,8 +11,8 @@ const __dirname = path.dirname(__filename)
 const iconsDir = path.join(__dirname, '..', '..', 'node_modules', '@iconify', 'json')
 
 
-function buildSVG({ body, width = 16, height = 16 }) {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}">${body}</svg>`
+function buildSVG({ body, width = 16, height = 16, displayHeight = 16 }) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${displayHeight}" height="${displayHeight}">${body}</svg>`
 }
 
 function svgToDataURI(svg) {
@@ -43,8 +43,9 @@ export async function getCollections(req, res, next) {
         const sortedIcons = Object.keys(collectionData.icons)
           .map((iconName) => ({
             name: iconName,
-            height: data[collection].height,
-            width: data[collection].height,
+            height: collectionData.height,
+            width: collectionData.width,
+            displayHeight: data[collection].height,
             ...collectionData.icons[iconName],
           }))
           .sort()
