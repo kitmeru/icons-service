@@ -30,8 +30,8 @@ export async function getCollections(req, res, next) {
 
     // Пагинация
     const total = collectionNames.length
-    const startIndex = (page - 1) * limit
-    const paginatedCollectionNames = collectionNames.slice(startIndex, startIndex + limit)
+    const startIndex = (parseInt(page) - 1) * parseInt(limit)
+    const paginatedCollectionNames = collectionNames.slice(startIndex, startIndex + parseInt(limit))
 
     // Для каждой коллекции берем топ-3 популярных иконки
     const collectionsWithPreview = await Promise.all(
