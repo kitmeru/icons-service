@@ -10,6 +10,4 @@ export const appConfig = {
   runsBehindProxy: true,
   appUrl: process.env.APP_URL,
   version: "/v1",
-
-  //  cronJobsEnabled: toBool(env("ENABLE_CRON_JOBS")),
 };

@@ -31,51 +31,8 @@ jobs:
           contents: |
             NODE_ENV='development'
             APP_URL=https://app.kitme.tech
-            APP_NAME=kitme-payment-service
-            
-            JWT_SECRET=${{ secrets.DEV_JWT_SECRET }}
-            SESSION_SECRET=${{ secrets.DEV_SESSION_SECRET }}
-            CRYPTO_SECRET=${{ secrets.DEV_CRYPTO_SECRET }}
-            CRYPTO_PASSWORD=${{ secrets.DEV_CRYPTO_PASSWORD }}
-            
-            PAYMENT_DB_NAME=paymentservcie
-            PAYMENT_DB_USER=${{ secrets.DEV_DB_USER }}
-            PAYMENT_DB_PASSWORD=${{ secrets.DEV_PAYMENT_DB_PASSWORD }}
-            PAYMENT_DB_HOST=${{ secrets.DEPLOY_HOST_DEV }}
-            PAYMENT_DB_PORT=5432
-            
-            LK_DB_NAME=lkservice
-            LK_DB_USER=${{ secrets.DEV_DB_USER }}
-            LK_DB_PASSWORD=${{ secrets.DEV_LK_DB_PASSWORD }}
-            LK_DB_HOST=${{ secrets.DEPLOY_HOST_DEV }}
-            LK_DB_PORT=5432
-            
-            NOTIFY_DB_NAME=lkservice
-            NOTIFY_DB_USER=${{ secrets.DEV_DB_USER }}
-            NOTIFY_DB_PASSWORD=${{ secrets.DEV_NOTIFY_DB_PASSWORD }}
-            NOTIFY_DB_HOST=${{ secrets.DEPLOY_HOST_DEV }}
-            NOTIFY_DB_PORT=5432
-            
-            BUILDER_DB_NAME=builderservice
-            BUILDER_DB_USER=${{ secrets.DEV_DB_USER }}
-            BUILDER_DB_PASSWORD=${{ secrets.DEV_BUILDER_DB_PASSWORD }}
-            BUILDER_DB_HOST=${{ secrets.DEPLOY_HOST_DEV }}
-            BUILDER_DB_PORT=5432
-            
-            RABBIT_MQ_HOST=${{ secrets.DEPLOY_HOST_DEV }}
-            RABBIT_MQ_PORT=5672
-            RABBIT_MQ_USER_NAME=${{ secrets.DEV_RABBIT_MQ_USER_NAME }}
-            RABBIT_MQ_PASSWORD=${{ secrets.DEV_RABBIT_MQ_PASSWORD }}
-            
-            SITE_PAYMENT_QUEUE=SITE_PAYMENT
-            DONATE_PAYMENT_QUEUE=DONATE_PAYMENT
-  
-            YOOKASSA_SHOPID=${{ secrets.DEV_YOOKASSA_SHOPID }}
-            YOOKASSA_TOKEN=${{ secrets.DEV_YOOKASSA_TOKEN }}
-            YOOKASSA_RETURN_URL=https://app.kitme.tech
-            
-            TRIAL_DAYS=7
-            
+            APP_NAME=kitme-icons-service
+            PORT=8008
 
       - name: rsync deployments
         uses: burnett01/rsync-deployments@7.0.1
@@ -97,4 +54,4 @@ jobs:
           key: ${{ secrets.DEPLOY_KEY_DEV }}
           port: 22
           script: |
-            sudo -u www-root /usr/lib/ispnodejs/bin/pm2 restart payment-service.api.kitme.tech
+            sudo -u www-root /usr/lib/ispnodejs/bin/pm2 restart icons-service.api.kitme.tech
