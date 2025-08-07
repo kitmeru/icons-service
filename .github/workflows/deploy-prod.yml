@@ -1,7 +1,9 @@
-name: Deploy to dev
+name: Deploy to prod
 
 on:
   push:
+    branches: [ "develop" ]
+  pull_request:
     branches: [ "develop" ]
 
 jobs:
@@ -27,8 +29,8 @@ jobs:
           path: ${{ github.workspace }}/.env
           write-mode: overwrite
           contents: |
-            NODE_ENV='development'
-            APP_URL=https://app.kitme.tech
+            NODE_ENV='production'
+            APP_URL=https://app.kitme.ru
             APP_NAME=kitme-icons-service
             PORT=8008
 
@@ -37,19 +39,19 @@ jobs:
         with:
           switches: -avzr --delete --exclude=".git" --exclude=".github"
           path: ./
-          remote_path: ${{ secrets.REMOTE_PATH }}
-          remote_host: ${{ secrets.DEPLOY_HOST_DEV }}
+          remote_path: ${{ secrets.REMOTE_PATH_PROD }}
+          remote_host: ${{ secrets.DEPLOY_HOST_PROD }}
           remote_port: 22
-          remote_user: ${{ secrets.DEPLOY_USER_DEV }}
-          remote_key: ${{ secrets.DEPLOY_KEY_DEV }}
+          remote_user: ${{ secrets.DEPLOY_USER_PROD }}
+          remote_key: ${{ secrets.DEPLOY_KEY_PROD }}
 
       - name: pm2 restart service
         uses: appleboy/ssh-action@v1.2.0
         with:
           command_timeout: 200m
-          host: ${{ secrets.DEPLOY_HOST_DEV }}
-          username: ${{ secrets.DEPLOY_USER_DEV }}
-          key: ${{ secrets.DEPLOY_KEY_DEV }}
+          host: ${{ secrets.DEPLOY_HOST_PROD }}
+          username: ${{ secrets.DEPLOY_USER_PROD }}
+          key: ${{ secrets.DEPLOY_KEY_PROD }}
           port: 22
           script: |
-            sudo -u www-root /usr/lib/ispnodejs/bin/pm2 restart icons-service.api.kitme.tech
+            sudo -u www-root env PATH="/usr/lib/ispnodejs/bin:$PATH" /usr/lib/ispnodejs/bin/pm2 restart icons-service.api.kitme.ru
